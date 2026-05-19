@@ -225,7 +225,9 @@ function vlookup(code, index, colIdx) {
 
 function toNum(v) {
   if (v === null || v === undefined || v === '') return null;
-  const n = parseFloat(v);
+  // Strip commas (e.g. "1,994,020.00") and % signs before parsing
+  const cleaned = String(v).replace(/,/g, '').replace(/%$/, '').trim();
+  const n = parseFloat(cleaned);
   return isNaN(n) ? null : n;
 }
 
